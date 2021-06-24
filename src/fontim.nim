@@ -18,11 +18,11 @@ func getFontsDir(): seq[string] =
 
 proc getFontPath*(name: string, slant = "Sans", suffix = "-Regular"): Option[string] =
   ## Returns the path of a given font with `name`, `slant` and `suffix`
-  let 
-    fontDirs = getFontsDir()
-    fontName = toLowerAscii &"{name}{slant}{suffix}.ttf"
 
-  for dir in fontDirs:
+  let parsedSuffix = if suffix.startsWith('-'): suffix else: &"-{suffix}" # Be a bit more gentle with the `suffix` delimiter
+  let fontName = toLowerAscii &"{name}{slant}{parsedSuffix}.ttf"
+
+  for dir in getFontsDir():
     # Iterate over all the files in the font directories
     for filePath in dir.walkDirRec:
       # Check if the filename matches, if so we found our font file!
