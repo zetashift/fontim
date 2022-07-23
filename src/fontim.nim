@@ -16,11 +16,11 @@ func getFontsDir(): seq[string] =
     "/usr/share/fonts/"
     ]
 
-proc getFontPath*(name: string, slant = "Sans", suffix = "-Regular"): Option[string] =
+proc getFontPath*(name: string, slant = "-Regular"): Option[string] =
   ## Returns the path of a given font with `name`, `slant` and `suffix`
 
-  let parsedSuffix = if suffix.startsWith('-'): suffix else: &"-{suffix}" # Be a bit more gentle with the `suffix` delimiter
-  let fontName = toLowerAscii &"{name}{slant}{parsedSuffix}.ttf"
+  let parsedSlant = if slant.startsWith('-'): slant else: &"-{slant}" # Be a bit more gentle with the `slant` delimiter
+  let fontName = toLowerAscii &"{name}{parsedSlant}.ttf"
 
   for dir in getFontsDir():
     # Iterate over all the files in the font directories
@@ -31,4 +31,3 @@ proc getFontPath*(name: string, slant = "Sans", suffix = "-Regular"): Option[str
 
   # In case we didn't find anything
   result = none[string]()
-

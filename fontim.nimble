@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.0"
+version       = "0.2.0"
 author        = "zetashift"
 description   = "A journey into cross-platform font path handling"
 license       = "MIT"
